@@ -137,6 +137,11 @@ namespace RP0
         [KSPField(guiName = "Y-", groupName = dragCubeGroup)] private string YN;
         [KSPField(guiName = "Z+", groupName = dragCubeGroup)] private string ZP;
         [KSPField(guiName = "Z-", groupName = dragCubeGroup)] private string ZN;
+        [KSPField(guiName = "Area", groupName = dragCubeGroup)] private string Area;
+        [KSPField(guiName = "Cross Sectional Area", groupName = dragCubeGroup)] private string CrossSectionalArea;
+        [KSPField(guiName = "Exposed Area", groupName = dragCubeGroup)] private string ExposedArea;
+        [KSPField(guiName = "Occlusion Mult", groupName = dragCubeGroup)] private string OcclusionMultiplier;
+        [KSPField(guiName = "Post-Occlusion Area", groupName = dragCubeGroup)] private string PostOcclusionArea;
         [KSPField] public float updateInterval = 0.25f;
 
         private bool showCubeInfo = false;
@@ -176,6 +181,11 @@ namespace RP0
                     Fields[nameof(YN)].guiActive = showCubeInfo;
                     Fields[nameof(ZP)].guiActive = showCubeInfo;
                     Fields[nameof(ZN)].guiActive = showCubeInfo;
+                    Fields[nameof(Area)].guiActive = showCubeInfo;
+                    Fields[nameof(CrossSectionalArea)].guiActive = showCubeInfo;
+                    Fields[nameof(ExposedArea)].guiActive = showCubeInfo;
+                    Fields[nameof(OcclusionMultiplier)].guiActive = showCubeInfo;
+                    Fields[nameof(PostOcclusionArea)].guiActive = showCubeInfo;
                 }
                 if (showCubeInfo)
                     BuildCubeData();
@@ -192,6 +202,11 @@ namespace RP0
             YN = $"{cubes.WeightedArea[3]:F2} ({cubes.GetCubeAreaDir(DragCubeList.GetFaceDirection(DragCube.DragFace.YN)):F2})";
             ZP = $"{cubes.WeightedArea[4]:F2} ({cubes.GetCubeAreaDir(DragCubeList.GetFaceDirection(DragCube.DragFace.ZP)):F2})";
             ZN = $"{cubes.WeightedArea[5]:F2} ({cubes.GetCubeAreaDir(DragCubeList.GetFaceDirection(DragCube.DragFace.ZN)):F2})";
+            Area = $"{cubes.Area:F3}";
+            CrossSectionalArea = $"{cubes.CrossSectionalArea:F3}";
+            ExposedArea = $"{cubes.ExposedArea:F3}";
+            OcclusionMultiplier = $"{cubes.OcclusionMultiplier:F3}";
+            PostOcclusionArea = $"{cubes.PostOcclusionArea:F3}";
         }
     }
 }
