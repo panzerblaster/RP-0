@@ -142,6 +142,10 @@ namespace RP0
         [KSPField(guiName = "Exposed Area", groupName = dragCubeGroup)] private string ExposedArea;
         [KSPField(guiName = "Occlusion Mult", groupName = dragCubeGroup)] private string OcclusionMultiplier;
         [KSPField(guiName = "Post-Occlusion Area", groupName = dragCubeGroup)] private string PostOcclusionArea;
+        [KSPField(guiName = "Part Aeroddynamic Area", groupName = dragCubeGroup)] private string PartAerodynamicArea;
+        [KSPField(guiName = "Part Exposed Area", groupName = dragCubeGroup)] private string PartExposedArea;
+        [KSPField(guiName = "Part SKinExposed Area", groupName = dragCubeGroup)] private string PartSkinExposedArea;
+        [KSPField(guiName = "Part SkinExposed Fraction", groupName = dragCubeGroup)] private string PartSkinExposedFraction;
         [KSPField] public float updateInterval = 0.25f;
 
         private bool showCubeInfo = false;
@@ -186,6 +190,10 @@ namespace RP0
                     Fields[nameof(ExposedArea)].guiActive = showCubeInfo;
                     Fields[nameof(OcclusionMultiplier)].guiActive = showCubeInfo;
                     Fields[nameof(PostOcclusionArea)].guiActive = showCubeInfo;
+                    Fields[nameof(PartAerodynamicArea)].guiActive = showCubeInfo;
+                    Fields[nameof(PartExposedArea)].guiActive = showCubeInfo;
+                    Fields[nameof(PartSkinExposedArea)].guiActive = showCubeInfo;
+                    Fields[nameof(PartSkinExposedFraction)].guiActive = showCubeInfo;
                 }
                 if (showCubeInfo)
                     BuildCubeData();
@@ -207,6 +215,10 @@ namespace RP0
             ExposedArea = $"{cubes.ExposedArea:F3}";
             OcclusionMultiplier = $"{cubes.OcclusionMultiplier:F3}";
             PostOcclusionArea = $"{cubes.PostOcclusionArea:F3}";
+            PartAerodynamicArea = $"{part.aerodynamicArea:F3}";
+            PartExposedArea = $"{part.exposedArea:F3}";
+            PartSkinExposedArea = $"{part.skinExposedArea:F3}";
+            PartSkinExposedFraction = $"{part.skinExposedAreaFrac:F3}";
         }
     }
 }
