@@ -18,40 +18,40 @@ KCT_Preset
 		KSCUpgradeTimes = True
 		TechUpgrades = False
 		SharedUpgradePool = True
-		DisableLPUpgrades = True
-		CommonBuildLine = True
-		StartingPoints = 1,500,5000
-		MaxRushClicks = 5
-		VABRecoveryTech = materialsScienceSpaceplanes
+		DisableLPUpgrades = True	//disables when true launchpad upgrades, size selection only on building new pads
+		CommonBuildLine = True	//when true disables separate build queues and build rates for VAB and SPH 
+		StartingPoints = 1,500,5000	//sets amount of free upgrade poins at the start of new save, for career, science, sandbox modes in order
+		MaxRushClicks = 5 
+		VABRecoveryTech = materialsScienceSpaceplanes	//defines tech prequisit to Recover to VAB option becoming available on recovery of landed craft
 	}
 	KCT_Preset_Time
 	{
-		OverallMultiplier = 25
-		BuildEffect = 1
+		OverallMultiplier = 25	//REMOVED on 2019.feb.10. [O] Was an overall time multiplier
+		BuildEffect = 1	//NOT USED [B] Previously would be multiplier in reduced buildtime if part has been built before
 		InventoryEffect = 100
-		ReconditioningEffect = 576
-		MaxReconditioning = 1350000000
-		RolloutReconSplit = 0.75
+		ReconditioningEffect = 576	//UNSURE May be [RE] in ReconditioningFormula
+		MaxReconditioning = 1350000000 //Appears to be unused, or implementation not based on formula below, which it used to be(this information is very dated).
+		RolloutReconSplit = 0.75	//[S] in ReconditioningFormula
 	}
 	KCT_Preset_Formula
 	{
-		NodeFormula = (2.5+([N]*(0.75-(0.45*(0.925^[N]))))) / 86400 / 365 * sign(-[I]) * (1+([R] * 0.25))
-		UpgradeFundsFormula = 20000
-		UpgradesForScience = [N]/20
-		ResearchFormula = -1
-		EffectivePartFormula = [PV]*[RV]*[MV]*[C]
-		ProceduralPartFormula = [PV]*[RV]*[MV]*[C]
-		BPFormula = 1/3*(400000 + (([E]^0.85)*2250))
-		KSCUpgradeFormula = ((([C]*0.2)^(0.75))*5000*([Adm]+[AC]+[MC]+[RD]+[RW]+[TS]+[SPH]+[VAB]))+(max((((([C]+100000)*0.2)^0.85)*4500-23000000), 750000)*[LP])
+		NodeFormula = (2.5+([N]*(0.75-(0.45*(0.925^[N]))))) / 86400 / 365 * sign(-[I]) * (1+([R] * 0.25))	//Science/s, same information as available in game as science/year. sign(-[I]) limits "production" lines to 1
+		UpgradeFundsFormula = 20000	//Cost of buying 1 KCT upgrade point
+		UpgradesForScience = [N]/20	//Numer of KCT upgrades awarded for science points earned. Not to be confused with purchaseing upgrade points for science. 
+		ResearchFormula = -1	//Disables earning science points for constructing vessels. (negative values disable)
+		EffectivePartFormula = [PV]*[RV]*[MV]*[C]	//Effective cost for parts after multipliers. Used in TODO.
+		ProceduralPartFormula = [PV]*[RV]*[MV]*[C]	
+		BPFormula = 1/3*(400000 + (([E]^0.85)*2250))	//BuildPoint cost of new craft. [E] is total effective cost (sum EffectivePartFormula for all parts). 
+		KSCUpgradeFormula = ((([C]*0.2)^(0.75))*5000*([Adm]+[AC]+[MC]+[RD]+[RW]+[TS]+[SPH]+[VAB]))+(max((((([C]+100000)*0.2)^0.85)*4500-23000000), 750000)*[LP])	//Defines the BuildPoint cost of KSC facility upgrades. [C] = Cost of upgrade in funds; *([Adm]+[AC]+[MC]+[RD]+[RW]+[TS]+[SPH]+[VAB]) and *[LP] chose which subsection to use.
 		ReconditioningFormula = 0.5*(abs([RE]-[S])*(([BP]*3-400000) * (0.7 + (([SN]^0.5)*0.05) + (([SP]^0.5)*0.05)) * (([L]+4)^2) * 0.00012)*50)
-		BuildRateFormula = (1+([L]*0.25))*(([I]+1)*max(([N]-1), 0)*0.015 + max(0.0001, min(0.1*[N], 0.1)))*sign([L]-[I])
-		UpgradeResetFormula = -1
-		InventorySaleFormula = 0
-		RolloutCostFormula = 1/4*((((([L]+1)^2.5)*200)-180) + (([E] - (0.9 * [C])) * 0.6))
-		IntegrationTimeFormula = [BP]*2.25
+		BuildRateFormula = (1+([L]*0.25))*(([I]+1)*max(([N]-1), 0)*0.015 + max(0.0001, min(0.1*[N], 0.1)))*sign([L]-[I])	//BP/s of given productionline. This is pretty well shown in game BuildRateFormula = (VAB/SPH Level bonus)*(BuildPoints/s of relevant productionline before bonus)*(this section disables productionlines you haven't unlocked yet)
+		UpgradeResetFormula = -1	//Disables reseting KCT upgrade poins.
+		InventorySaleFormula = 0	
+		RolloutCostFormula = 1/4*((((([L]+1)^2.5)*200)-180) + (([E] - (0.9 * [C])) * 0.6))	//Funds cost of rollout. (((([L]+1)^2.5)*200)-180): base cost based on Launchpad used. (([E] - (0.9 * [C])) * 0.6)) : added cost, is 6%of craft cost + an added cost for part and module variables.
+		IntegrationTimeFormula = [BP]*2.25	//UNSURE Best current guess is an added craft manufacturing time not effected by buildrate
 		IntegrationCostFormula = (([E] - (0.9 * [C])) * 0.6)
 		NewLaunchPadCostFormula = 12500
-		RushCostFormula = ([TC]+((max(0,2000-[TC]))^0.9))*(1.15^[RC])
+		RushCostFormula = ([TC]+((max(0,2000-[TC]))^0.9))*(1.15^[RC]) //[RC] = rush-clicks already used on craft. [TC] unsure
 	}
 	KCT_Preset_Part_Variables
 	{
@@ -104,12 +104,15 @@ I = Inventory Effect (if active)
 B = Build Effect
 PV = Part Variables
 MV = Module Variables
+R = R&D Level (building upgrade, from Kerbal Space Center Screen)
 
 BUILD RATE FORMULAS
 E = Total Effective Cost
 BP = Build Points
-L = Launch Site Level
+L = VAB/SPH/Launchpad Level, depending on formula (building upgrade, from Kerbal Space Center Screen)
+I = Index of Production Line (as in, after upgrading the VAB, and having more than one, which production line is building this. Stars at 0.)
+N = VAB/SPH/RND KCT upgrades (KCT upgrade points from KCT/upgrade screen)
 SN = Num Stages
 SP = Num Stage Parts
 SC = Stage Part Cost
-
+?RE = Reconditioning Effect
