@@ -18,7 +18,7 @@ KCT_Preset
 		KSCUpgradeTimes = True
 		TechUpgrades = False
 		SharedUpgradePool = True
-		DisableLPUpgrades = True	//disables when true launchpad upgrades, size selection only on building new pads
+		DisableLPUpgrades = True	//when true disables launchpad upgrades and only allows size selection when building new pads
 		CommonBuildLine = True	//when true disables separate build queues and build rates for VAB and SPH 
 		StartingPoints = 1,500,5000	//sets amount of free upgrade poins at the start of new save, for career, science, sandbox modes in order
 		MaxRushClicks = 5 
@@ -26,12 +26,12 @@ KCT_Preset
 	}
 	KCT_Preset_Time
 	{
-		OverallMultiplier = 25	//REMOVED on 2019.feb.10. [O] Was an overall time multiplier
-		BuildEffect = 1	//NOT USED [B] Previously would be multiplier in reduced buildtime if part has been built before
+		OverallMultiplier = 25	//REMOVED from RP-1 preset on 2019.feb.10.; [O]; Was an overall time multiplier.
+		BuildEffect = 1	//NOT USED; [B]; Would be multiplier in reduced buildtime if part has been built before.
 		InventoryEffect = 100
-		ReconditioningEffect = 576	//UNSURE May be [RE] in ReconditioningFormula
+		ReconditioningEffect = 576	//UNSURE; May be [RE] in ReconditioningFormula.
 		MaxReconditioning = 1350000000 //Appears to be unused, or implementation not based on formula below, which it used to be(this information is very dated).
-		RolloutReconSplit = 0.75	//[S] in ReconditioningFormula
+		RolloutReconSplit = 0.75	//[S]; Used in ReconditioningFormula.
 	}
 	KCT_Preset_Formula
 	{
@@ -39,7 +39,7 @@ KCT_Preset
 		UpgradeFundsFormula = 20000	//Cost of buying 1 KCT upgrade point
 		UpgradesForScience = [N]/20	//Numer of KCT upgrades awarded for science points earned. Not to be confused with purchaseing upgrade points for science. 
 		ResearchFormula = -1	//Disables earning science points for constructing vessels. (negative values disable)
-		EffectivePartFormula = [PV]*[RV]*[MV]*[C]	//Effective cost for parts after multipliers. Used in TODO.
+		EffectivePartFormula = [PV]*[RV]*[MV]*[C]	//Effective cost for parts after multipliers.; Used in to calculate [E], used in BPFormula, and RolloutCostFormula.
 		ProceduralPartFormula = [PV]*[RV]*[MV]*[C]	
 		BPFormula = 1/3*(400000 + (([E]^0.85)*2250))	//BuildPoint cost of new craft. [E] is total effective cost (sum EffectivePartFormula for all parts). 
 		KSCUpgradeFormula = ((([C]*0.2)^(0.75))*5000*([Adm]+[AC]+[MC]+[RD]+[RW]+[TS]+[SPH]+[VAB]))+(max((((([C]+100000)*0.2)^0.85)*4500-23000000), 750000)*[LP])	//Defines the BuildPoint cost of KSC facility upgrades. [C] = Cost of upgrade in funds; *([Adm]+[AC]+[MC]+[RD]+[RW]+[TS]+[SPH]+[VAB]) and *[LP] chose which subsection to use.
