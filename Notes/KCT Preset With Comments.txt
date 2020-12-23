@@ -41,14 +41,14 @@ KCT_Preset
 		ResearchFormula = -1	//Disables earning science points for constructing vessels. (negative values disable)
 		EffectivePartFormula = [PV]*[RV]*[MV]*[C]	//Effective cost for parts after multipliers.; Used in to calculate [E], used in BPFormula, and RolloutCostFormula.
 		ProceduralPartFormula = [PV]*[RV]*[MV]*[C]	
-		BPFormula = 1/3*(400000 + (([E]^0.85)*2250))	//BuildPoint cost of new craft. [E] is total effective cost (sum EffectivePartFormula for all parts). 
+		BPFormula = 1/3*(400000 + (([E]^0.85)*2250))	//Part of BuildPoint cost of new craft. [E] is total effective cost (sum EffectivePartFormula for all parts). 
 		KSCUpgradeFormula = ((([C]*0.2)^(0.75))*5000*([Adm]+[AC]+[MC]+[RD]+[RW]+[TS]+[SPH]+[VAB]))+(max((((([C]+100000)*0.2)^0.85)*4500-23000000), 750000)*[LP])	//Defines the BuildPoint cost of KSC facility upgrades. [C] = Cost of upgrade in funds; *([Adm]+[AC]+[MC]+[RD]+[RW]+[TS]+[SPH]+[VAB]) and *[LP] chose which subsection to use.
 		ReconditioningFormula = 0.5*(abs([RE]-[S])*(([BP]*3-400000) * (0.7 + (([SN]^0.5)*0.05) + (([SP]^0.5)*0.05)) * (([L]+4)^2) * 0.00012)*50)
 		BuildRateFormula = (1+([L]*0.25))*(([I]+1)*max(([N]-1), 0)*0.015 + max(0.0001, min(0.1*[N], 0.1)))*sign([L]-[I])	//BP/s of given productionline. This is pretty well shown in game BuildRateFormula = (VAB/SPH Level bonus)*(BuildPoints/s of relevant productionline before bonus)*(this section disables productionlines you haven't unlocked yet)
 		UpgradeResetFormula = -1	//Disables reseting KCT upgrade poins.
 		InventorySaleFormula = 0	
 		RolloutCostFormula = 1/4*((((([L]+1)^2.5)*200)-180) + (([E] - (0.9 * [C])) * 0.6))	//Funds cost of rollout. (((([L]+1)^2.5)*200)-180): base cost based on Launchpad used. (([E] - (0.9 * [C])) * 0.6)) : added cost, is 6%of craft cost + an added cost for part and module variables.
-		IntegrationTimeFormula = [BP]*2.25	//UNSURE Best current guess is an added craft manufacturing time not effected by buildrate
+		IntegrationTimeFormula = [BP]*2.25	//2nd part of BuildPoint cost of new craft, actual BuildPoint cost is BPFormula+IntegrationTimeFormula
 		IntegrationCostFormula = (([E] - (0.9 * [C])) * 0.6)
 		NewLaunchPadCostFormula = 12500
 		RushCostFormula = ([TC]+((max(0,2000-[TC]))^0.9))*(1.15^[RC]) //[RC] = rush-clicks already used on craft. [TC] unsure
