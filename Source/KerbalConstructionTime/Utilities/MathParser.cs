@@ -182,13 +182,14 @@ namespace KerbalConstructionTime
             return GetStandardFormulaValue("AirlaunchTime", variables);
         }
 
-        private static Dictionary<string, string> GetIntegrationRolloutVariables(BuildListVessel vessel, List<BuildListVessel> mergedVessels = null)
+        private static Dictionary<string, string> GetIntegrationRolloutVariables(BuildListVessel vessel, List<BuildListVessel> mergedVessels = null) //Incompleat conversion to use merged vessel list, made for RP1 v1.7 formula
         {
-            double loadedMass, emptyMass, loadedCost, emptyCost;
+            double loadedMass, emptyMass, loadedCost, emptyCost, effectiveCost;
             loadedCost = vessel.Cost;
             emptyCost = vessel.EmptyCost;
             loadedMass = vessel.GetTotalMass();
             emptyMass = vessel.EmptyMass;
+            effectiveCost = vessel.EffectiveCost;
 
             if (mergedVessels != null)
             {
@@ -198,6 +199,7 @@ namespace KerbalConstructionTime
                     emptyCost += v.EmptyCost;
                     loadedMass += v.GetTotalMass();
                     emptyMass += v.EmptyMass;
+                    effectiveCost += v.EffectiveCost;
                 }
             }
 
@@ -220,7 +222,7 @@ namespace KerbalConstructionTime
                 EditorMax = Utilities.GetBuildingUpgradeMaxLevel(SpaceCenterFacility.SpaceplaneHangar);
                 LaunchSiteMax = Utilities.GetBuildingUpgradeMaxLevel(SpaceCenterFacility.Runway);
             }
-            double BP = vessel.BuildPoints;
+            double BP = Utilities.GetBuildTime(effectiveCost);
             double OverallMult = PresetManager.Instance.ActivePreset.TimeSettings.OverallMultiplier;
 
             var variables = new Dictionary<string, string>
@@ -230,7 +232,7 @@ namespace KerbalConstructionTime
                 { "C", loadedCost.ToString() },
                 { "c", emptyCost.ToString() },
                 { "VAB", isVABVessel.ToString() },
-                { "E", vessel.EffectiveCost.ToString() },
+                { "E", effectiveCost.ToString() },
                 { "BP", BP.ToString() },
                 { "L", LaunchSiteLvl.ToString() },
                 { "LM", LaunchSiteMax.ToString() },

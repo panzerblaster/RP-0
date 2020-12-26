@@ -125,22 +125,30 @@ namespace KerbalConstructionTime
             origBP += ship.IntegrationPoints;
             double buildTime = KCTGameStates.EditorBuildTime + KCTGameStates.EditorIntegrationTime;
 
-            double difference, newProgress;
-            double progress;
-            if (ship.IsFinished) progress = origBP;
-            else progress = ship.Progress;
+            double difference, progress, newProgress;
 
             if (KCTGameStates.mergedVessels.Count() == 0)
             {
                 difference = Math.Abs(buildTime - origBP);
+                if (ship.IsFinished) progress = origBP;
+                else progress = ship.Progress;
                 newProgress = Math.Max(0, progress - (1.1 * difference));
+                GUILayout.Label($"Original: {Math.Max(0, Math.Round(100 * (progress / origBP), 2))}%");
             }
             else
             {
-                newProgress = buildTime * (1 - PresetManager.Instance.ActivePreset.TimeSettings.MergingTimePercent / 100);
+                double mergedCost = ship.EffectiveCost;
+                foreach (BuildListVessel v in KCTGameStates.mergedVessels)
+                {
+                    mergedCost += v.EffectiveCost;
+                }
+
+                difference = Math.Abs(buildTime - (Utilities.GetBuildTime(mergedCost) + MathParser.ParseIntegrationTimeFormula(ship,KCTGameStates.mergedVessels)));
+                progress = (Utilities.GetBuildTime(mergedCost) + MathParser.ParseIntegrationTimeFormula(ship,KCTGameStates.mergedVessels)); 
+                newProgress = Math.Max(0, progress * (1 - PresetManager.Instance.ActivePreset.TimeSettings.MergingTimePercent / 100) - (1.1 * difference));
+                GUILayout.Label($"Original: 100%"); //pointless, since only compleated vessels can be merged to, replaced wiht constant because of wierd values while holding added vessel
             }
 
-            GUILayout.Label($"Original: {Math.Max(0, Math.Round(100 * (progress / origBP), 2))}%");
             GUILayout.Label($"Edited: {Math.Round(100 * newProgress / buildTime, 2)}%");
 
             BuildListVessel.ListType type = EditorLogic.fetch.launchSiteName == "LaunchPad" ? BuildListVessel.ListType.VAB : BuildListVessel.ListType.SPH;
