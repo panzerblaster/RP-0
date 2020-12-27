@@ -6,6 +6,7 @@ Current state of progress:<br/>
 - The technical, gui and initial cost/time aspects of the intended feature have been added, and initial testing has been succsesful.<br/>
 - Technical debt has been introduced by the uses of Utilities.GetBuildTime() and the **partial** update of MathParser.ParseIntegrationTimeFormula(), resulting in limited compatibility with KCT presets (formulas) utilising variables differing from those in the current RP1 preset (currently utalised are \[E\],\[BP\]). Current implementation will result in incorrect merge-times in these cases.<br/>
 - No cost is currently assigned to the merging of vessels.<br/>
+- Users are currently forced to cancel all edits to cancel unintended merge once the craft has been clicked on in the list of mergeble crafts.
 - The merge-time is currently defined as a simple percentege of construction time of resulting vessel.<br/>
 - Merging vessels from different (VAB/SPH) storages is currently allowed, this should logically be tech-gated behind recover to VAB.<br/>
 
