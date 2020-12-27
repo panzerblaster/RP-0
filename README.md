@@ -1,6 +1,6 @@
 #### About this fork
 
-This is a fork of the Kerbal Space Program (KSP) mod Realistic Progression One (RP1) with the purpose of implementing the merging of in vessels in Kerbal Construction Time (KCT) storage, by porting that feature from DarthPointers fork of KCT. This fork is based on the 2020.12.25 states of KSP-RO/RP-0 and DarthPointer/KCT.
+This is a fork of the Kerbal Space Program (KSP) mod Realistic Progression One (RP1) with the purpose of implementing the merging of vessels in Kerbal Construction Time (KCT) storage, by porting that feature from DarthPointers fork of KCT. This fork is based on the 2020.12.25 states of KSP-RO/RP-0 and DarthPointer/KCT.
 
 Current state of progress:<br/>
 - The technical, gui and initial cost/time aspects of the intended feature have been added, and initial testing has been succsesful.<br/>
