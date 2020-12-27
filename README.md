@@ -1,3 +1,16 @@
+#### About this fork
+
+This is a fork of the Kerbal Space Program (KSP) mod Realistic Progression One (RP1) with the purpose of implementing the merging of in vessels in Kerbal Construction Time (KCT) storage, by porting that feature from DarthPointers fork of KCT. This fork is based on the 2020.12.25 states of KSP-RO/RP-0 and DarthPointer/KCT.
+
+Current state of progress:<br/>
+- The technical, gui and initial cost/time aspects of the intended feature have been added, and initial testing has been succsesful.<br/>
+- Technical debt has been introduced by the uses of Utilities.GetBuildTime() and the **partial** update of MathParser.ParseIntegrationTimeFormula(), resulting in limited compatibility with KCT presets (formulas) utilising variables differing from those in the current RP1 preset (currently utalised are \[E\],\[BP\]). Current implementation will result in incorrect merge-times in these cases.<br/>
+- No cost is currently assigned to the merging of vessels.<br/>
+- The merge-time is currently defined as a simple percentege of construction time of resulting vessel.<br/>
+- Merging vessels from different (VAB/SPH) storages is currently allowed, this should logically be tech-gated behind recover to VAB.<br/>
+
+#### Below is the original readme of the RP1 projekt, by the RP1 team:
+
 Welcome to Realistic Progression One, the heavyweight career addon for Kerbal Space Program's Realism Overhaul.
 
 RP-1 is a career mode for RealismOverhaul with minimal install requirements, and with fair and balanced gameplay. Our aim is to allow players to enjoy RealismOverhaul in career mode, without installing a huge number of modules on top of those required by RealismOverhaul itself. However we also wish to ensure that RP-1 works with as many additional mods as possible; we use a fresh fully icon rebuilt Tech Tree for the basis of career progression, and try to place as many parts from other mods as possible in a historical fashion.  Right now a good number of nodes lack much in the way of parts allowing for placement of balanced historically appropriate parts in those nodes. 
