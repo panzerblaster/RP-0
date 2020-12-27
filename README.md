@@ -10,6 +10,9 @@ Current state of progress:<br/>
 - The merge-time is currently defined as a simple percentege of construction time of resulting vessel.<br/>
 - Merging vessels from different (VAB/SPH) storages is currently allowed, this should logically be tech-gated behind recover to VAB.<br/>
 
+Things that probably also need doing:
+- Replace percentage based time with formula based one
+
 #### Below is the original readme of the RP1 projekt, by the RP1 team:
 
 Welcome to Realistic Progression One, the heavyweight career addon for Kerbal Space Program's Realism Overhaul.
